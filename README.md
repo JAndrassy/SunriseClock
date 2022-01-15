@@ -15,7 +15,7 @@ A light 'alarm' clock designed for gentle wake-up with increasing light intensit
 
 ## Images
 
-<img src="img/sunriseclock-light.jpg" width="350"> <img src="img/sunriseclock-setup.png" width="310">
+<img src="img/sunriseclock-front.jpg" width="350"> <img src="img/sunriseclock-setup.png" width="310">
 <img src="img/sunriseclock-manual.png">
 <img src="img/sunriseclock-back.jpg" width="350"> <img src="img/sunriseclock-open.jpg" width="400">
 
@@ -34,3 +34,5 @@ A light 'alarm' clock designed for gentle wake-up with increasing light intensit
 * the fireplace effect has center LEDs slowly random pulsing in smaller PWM range and the left and right LEDs fast random pulsing at full PWM range. the 'fire' fades over falling asleep time.
 * the candles effect uses slow random pulsing of left and right LEDs block at small PWM range
 * and yes, I will buy a cable with 90° micro USB connector
+
+<a href="https://www.buymeacoffee.com/jurajandraY" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
