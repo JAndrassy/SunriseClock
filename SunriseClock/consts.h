@@ -20,7 +20,7 @@ const unsigned short LONG_PUSH_INTERVAL = 2000; // miliseconds
 const unsigned short SET_TIME_BLINK_MILLIS = 250;
 const unsigned short ALARM_BLINK_MILLIS = 700;
 const unsigned MENU_DISPLAY_TIMEOUT = 30000; // miliseconds
-const short LDR_MAX_LIGHT = 400; // max for max display brightness
+const short LDR_MAX_LIGHT = 100; // max for max display brightness
 const short LED_MAX_PWM = PWMRANGE;
 const byte LIGHT_MAX_LEVEL = 5;
 

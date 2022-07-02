@@ -6,6 +6,7 @@
 #include <Encoder.h> // patched with https://github.com/PaulStoffregen/Encoder/pull/49
 #include <Bounce2.h> // maintainer Thomas O Fredericks
 #include <ESP_EEPROM.h> //author j-watson
+#include <Average.h> // https://github.com/MajenkoLibraries/Average
 #include "consts.h"
 
 TM1637Display display(DISPLAY_SCLK_PIN, DISPLAY_DATA_PIN);
@@ -393,7 +394,8 @@ void loop() {
   // display refresh
   if (currentMillis - displayRefreshMillis > DISPLAY_REFRESH_INTERVAL) {
     displayRefreshMillis = currentMillis;
-    static int lastLDRReading = 1300; // init out of range
+    static Average<short> ave(20);
+    static int lastMean = 1300; // init out of range
     if (clockState == ClockState::ALARM && config.alarmDisplay != AlarmDisplay::NONE) {
       switch (config.alarmDisplay) {
         case AlarmDisplay::NONE: // to satisfy compiler warning
@@ -408,16 +410,17 @@ void loop() {
           }
           break;
       }
-      lastLDRReading = 1300;
+      lastMean = 1300;
     } else {
       short a = analogRead(PIN_A0);
-      if (abs(a - lastLDRReading) > 25) {
-        lastLDRReading = a;
+      float mean = ave.rolling(a);
+      if (abs(mean - lastMean) > 5) {
+        lastMean = mean;
         byte brightness;
         if (a > LDR_MAX_LIGHT) {
           brightness = 7;
         } else {
-          brightness = map(a, 0, LDR_MAX_LIGHT, 0, 7);
+          brightness = map(mean, 0, LDR_MAX_LIGHT, 0, 7);
         }
         display.setBrightness(brightness, true);
       }
