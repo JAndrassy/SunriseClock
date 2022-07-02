@@ -89,10 +89,14 @@ void setup() {
   wm.addParameter(&wmParamSleepLEDs);
   wm.addParameter(&wmParamSleepDuration);
   wm.setSaveParamsCallback(saveParamsCallback);
+  wm.setTimeout(120);
 
   if (WiFi.waitForConnectResult() != WL_CONNECTED) {
     display.setSegments(SEG_CNAP);
-    wm.autoConnect("NTPClock");
+    do {
+      WiFi.begin();
+      wm.autoConnect("NTPClock");
+    } while (WiFi.status() != WL_CONNECTED);
     saveConfig();
   }
   WiFi.persistent(false); // to not store mode changes
