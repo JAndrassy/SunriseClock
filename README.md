@@ -35,4 +35,3 @@ A light 'alarm' clock designed for gentle wake-up with increasing light intensit
 * the candles effect uses slow random pulsing of left and right LEDs block at small PWM range
 * and yes, I will buy a cable with 90° micro USB connector
 
-<a href="https://www.buymeacoffee.com/jurajandraY" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
