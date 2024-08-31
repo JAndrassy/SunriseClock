@@ -3,11 +3,13 @@
 #include <TZ.h>  // in esp8266 core
 #include <coredecls.h> // for settimeofday_cb()
 #include <TM1637Display.h> // author Avishay Orpaz
-#include <Encoder.h> // patched with https://github.com/PaulStoffregen/Encoder/pull/49
+#include <Encoder.h> // by Paul Stoffregen
 #include <Bounce2.h> // maintainer Thomas O Fredericks
 #include <ESP_EEPROM.h> //author j-watson
 #include <Average.h> // https://github.com/MajenkoLibraries/Average
 #include "consts.h"
+
+using namespace Bounce2;
 
 TM1637Display display(DISPLAY_SCLK_PIN, DISPLAY_DATA_PIN);
 byte displayData[4];
@@ -53,6 +55,8 @@ WiFiManagerParameter wmParamSleepDuration("sleepduration", "Fall asleep duration
     "60", 3, htmlInputTypeNumber);
 
 void setup() {
+
+  analogWriteRange(LED_MAX_PWM);
 
   pinMode(LEDS_CENTRAL_PIN, OUTPUT);
   pinMode(LEDS_LEFT_PIN, OUTPUT);
@@ -651,8 +655,6 @@ bool fadeEffect(bool reset) {
 
 bool fireEffect(bool reset) {
 
-  const short BASE_PWM_RANGE = LED_MAX_PWM /  4;
-  const short FLAME_PWM_RANGE = LED_MAX_PWM /  2;
   const byte pins[] = {LEDS_CENTRAL_PIN, LEDS_LEFT_PIN, LEDS_RIGHT_PIN};
   const short speedStep[sizeof(pins)] = {500, 100, 100}; // micros
 
@@ -667,14 +669,14 @@ bool fireEffect(bool reset) {
   if (reset) {
     topPwm = LED_MAX_PWM;
     step = (60000L * config.sleepDuration) / LED_MAX_PWM;
-    for (int i = 0; i < sizeof(pins); i++) {
+    for (byte i = 0; i < sizeof(pins); i++) {
       currentPwm[i] = 0;
     }
   }
   if (topPwm == 0)
     return false;
-  for (int i = 0; i < sizeof(pins); i++) {
-    if (micros() - prevMicros[i] > speedStep[i]) {
+  for (byte i = 0; i < sizeof(pins); i++) {
+    if (micros() - prevMicros[i] > (unsigned long) speedStep[i]) {
       prevMicros[i] = micros();
       if (currentPwm[i] == targetPwm[i]) {
         targetPwm[i] = random(topPwm - ((i == 0) ? (topPwm / 4) : (2 * topPwm / 3)), topPwm);
@@ -701,7 +703,7 @@ void candlesEffect() {
   static short currentPwm[sizeof(pins)];
   static unsigned long prevMicros[sizeof(pins)];
 
-  for (int i = 0; i < sizeof(pins); i++) {
+  for (byte i = 0; i < sizeof(pins); i++) {
     if (micros() - prevMicros[i] > FLAME_SPEED) {
       prevMicros[i] = micros();
       if (currentPwm[i] == targetPwm[i]) {
