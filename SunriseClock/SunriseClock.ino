@@ -113,6 +113,8 @@ void setup() {
     calculateNextAlarmMinutes();
   });
   configTime(TIME_ZONE, "pool.ntp.org");
+
+  resetEffects();
 }
 
 void loop() {
