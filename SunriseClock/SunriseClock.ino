@@ -623,10 +623,10 @@ void cycleEffect() {
 void pulseEffect() {
 
   static short pwm;
-  static int8_t dir = 1;
+  static int8_t dir = -1;
   static unsigned long previousMillis;
 
-  if (millis() - previousMillis > 5) {
+  if (millis() - previousMillis > 1) {
     previousMillis = millis();
     analogWrite(LEDS_CENTRAL_PIN, pwm);
     analogWrite(LEDS_LEFT_PIN, pwm);
