@@ -41,6 +41,41 @@ const uint8_t SEG_ALARM_MODE_SET_AL_NO[] = {
   SEG_C | SEG_D | SEG_E | SEG_G    // o
   };
 
+const uint8_t SEG_ALARM_EFFECT_NONE[] = {
+  SEG_A | SEG_D | SEG_E | SEG_F | SEG_G, // E
+  SEG_A | SEG_E | SEG_F | SEG_G | 0x80,  // F:
+  SEG_C | SEG_E | SEG_G,           // n
+  SEG_C | SEG_D | SEG_E | SEG_G    // o
+  };
+
+const uint8_t SEG_ALARM_EFFECT_SUNRISE[] = {
+  SEG_A | SEG_D | SEG_E | SEG_F | SEG_G, // E
+  SEG_A | SEG_E | SEG_F | SEG_G | 0x80,  // F:
+  SEG_A | SEG_C | SEG_D | SEG_F | SEG_G, // S
+  SEG_E | SEG_G                          // r
+  };
+
+const uint8_t SEG_ALARM_EFFECT_BLINK[] = {
+  SEG_A | SEG_D | SEG_E | SEG_F | SEG_G,  // E
+  SEG_A | SEG_E | SEG_F | SEG_G | 0x80,   // F:
+  SEG_C | SEG_D  | SEG_E | SEG_F | SEG_G, // b
+  SEG_D | SEG_E | SEG_F                   // L
+  };
+
+const uint8_t SEG_ALARM_EFFECT_CYCLE[] = {
+  SEG_A | SEG_D | SEG_E | SEG_F | SEG_G, // E
+  SEG_A | SEG_E | SEG_F | SEG_G | 0x80,  // F:
+  SEG_A | SEG_D | SEG_E | SEG_F,         // C
+  SEG_D | SEG_E | SEG_G                  // c
+  };
+
+const uint8_t SEG_ALARM_EFFECT_PULSE[] = {
+  SEG_A | SEG_D | SEG_E | SEG_F | SEG_G, // E
+  SEG_A | SEG_E | SEG_F | SEG_G | 0x80,  // F:
+  SEG_A | SEG_B | SEG_E | SEG_F | SEG_G, // P
+  SEG_C | SEG_D | SEG_E                  // u
+  };
+
 const uint8_t SEG_MENU_D1_D5[] = {
     SEG_B | SEG_C | SEG_D | SEG_E | SEG_G, // d
     SEG_E | SEG_F | 0x80,                  // 1 :

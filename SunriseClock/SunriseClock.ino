@@ -291,6 +291,10 @@ void loop() {
         updateMenu(state);
         calculateNextAlarmMinutes(); // to update the indicator immediately
         break;
+      case MENU_ALARM_EFFECT:
+        rotateValue((byte&) config.alarmLEDs, 1, (byte) AlarmLEDs::NONE, (byte) AlarmLEDs::PULSE);
+        updateMenu(state);
+        break;
       case MENU_ALARM_D1_D5:
         switch (alarmSetState) {
           case AlarmSetState::NONE:
@@ -514,6 +518,25 @@ void updateMenu(byte state) {
         case AlarmMode::WORK_DAYS:
           displayData[2] = display.encodeDigit(1);
           displayData[3] = display.encodeDigit(5);
+          break;
+      }
+      break;
+    case MENU_ALARM_EFFECT:
+      switch (config.alarmLEDs) {
+        case AlarmLEDs::NONE:
+          memcpy(displayData, SEG_ALARM_EFFECT_NONE, 4);
+          break;
+        case AlarmLEDs::SUNRISE:
+          memcpy(displayData, SEG_ALARM_EFFECT_SUNRISE, 4);
+          break;
+        case AlarmLEDs::BLINK:
+          memcpy(displayData, SEG_ALARM_EFFECT_BLINK, 4);
+          break;
+        case AlarmLEDs::CYCLE:
+          memcpy(displayData, SEG_ALARM_EFFECT_CYCLE, 4);
+          break;
+        case AlarmLEDs::PULSE:
+          memcpy(displayData, SEG_ALARM_EFFECT_PULSE, 4);
           break;
       }
       break;

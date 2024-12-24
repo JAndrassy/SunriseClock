@@ -29,6 +29,7 @@ enum {
   MENU_END,
   MENU_START_SLEEP,
   MENU_ALARM_MODE,
+  MENU_ALARM_EFFECT,
   MENU_ALARM_D1_D5,
   MENU_ALARM_D6_D7,
   MENU_CONF_AP
@@ -77,6 +78,11 @@ extern const uint8_t SEG_NOTIME[];
 extern const uint8_t SEG_CONF[];
 extern const uint8_t SEG_CNAP[];
 extern const uint8_t SEG_ALARM_MODE_SET_AL_NO[];
+extern const uint8_t SEG_ALARM_EFFECT_NONE[];
+extern const uint8_t SEG_ALARM_EFFECT_SUNRISE[];
+extern const uint8_t SEG_ALARM_EFFECT_BLINK[];
+extern const uint8_t SEG_ALARM_EFFECT_CYCLE[];
+extern const uint8_t SEG_ALARM_EFFECT_PULSE[];
 extern const uint8_t SEG_MENU_D1_D5[];
 extern const uint8_t SEG_MENU_D6_D7[];
 extern const uint8_t SEG_MENU_SLEEP[];
