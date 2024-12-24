@@ -218,8 +218,14 @@ void loop() {
   if (abs(dir) >= ENCODER_PULSES_PER_STEP) {
     if (state == CLOCK) {
       if (clockState == ClockState::IDLE) {
-        rotateValue(lightLevel, dir, 0, 5);
-        ledsLight(lightLevel);
+        rotateValue(lightLevel, dir, 0, 7);
+        if (lightLevel > 5) { // 6 is the candles effect and 7 is the fireplace effect
+          byte tmp = lightLevel;
+          resetEffects();
+          lightLevel = tmp;
+        } else {
+          ledsLight(lightLevel);
+        }
       }
     } else { // in menu
       menuTimeoutMillis = 0;
@@ -399,6 +405,18 @@ void loop() {
       clockState = ClockState::IDLE;
       resetEffects();
     }
+  }
+
+  // handle special lightLevels selectable in CLOCK mode
+  switch (lightLevel) {
+    case 6:
+      candlesEffect();
+      break;
+    case 7:
+      fireEffect(false);
+      break;
+    default:
+      break;
   }
 
   // display refresh
