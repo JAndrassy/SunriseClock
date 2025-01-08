@@ -86,6 +86,9 @@ extern const uint8_t SEG_ALARM_EFFECT_PULSE[];
 extern const uint8_t SEG_MENU_D1_D5[];
 extern const uint8_t SEG_MENU_D6_D7[];
 extern const uint8_t SEG_MENU_SLEEP[];
+extern const uint8_t SEG_MENU_SLEEP_EFFECT_FADE[];
+extern const uint8_t SEG_MENU_SLEEP_EFFECT_FIRE[];
+extern const uint8_t SEG_MENU_SLEEP_EFFECT_CANDLES[];
 extern const uint8_t SEG_MENU_END[];
 
 const size_t htmlAlarmLEDsComboBoxLength = 360; // to have the size checked by the compiler

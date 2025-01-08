@@ -128,6 +128,7 @@ void loop() {
   static byte state = CLOCK;
   static ClockState clockState = ClockState::IDLE;
   static AlarmSetState alarmSetState = AlarmSetState::NONE;
+  static bool sleepModeSelectionMenu = false;
   static byte lastDisplayedMinute = FORCE_SHOW_CLOCK;
   static short minuteNow;
   static bool alarmExecuted;  // flag for the first minute of alarm
@@ -233,6 +234,9 @@ void loop() {
         rotateValue(setAlarmHour, dir, 0, 23);
       } else if (alarmSetState == AlarmSetState::MINUTE) {
         rotateValue(setAlarmMinute, dir, 0, 59);
+      } else if (sleepModeSelectionMenu) {
+        rotateValue((byte&) config.sleepLEDs, dir, (byte) SleepLEDs::FADE, (byte) SleepLEDs::CANDLES);
+        updateSleepModeMenu();
       } else {
         rotateValue(state, dir, MENU_END, MENU_CONF_AP);
         updateMenu(state);
@@ -282,9 +286,14 @@ void loop() {
       case MENU_START_SLEEP:
         resetEffects();
         sleepStartMinute = minuteNow;
-        clockState = ClockState::SLEEP;
-        state = CLOCK;
-        saveConfig();
+        if (sleepModeSelectionMenu) {
+          clockState = ClockState::SLEEP;
+          state = CLOCK;
+          saveConfig();
+        } else {
+          updateSleepModeMenu();
+        }
+        sleepModeSelectionMenu = !sleepModeSelectionMenu;
         break;
       case MENU_ALARM_MODE:
         rotateValue((byte&) config.alarmMode, 1, (byte) AlarmMode::OFF, (byte) AlarmMode::WORK_DAYS);
@@ -353,6 +362,7 @@ void loop() {
     if (currentMillis - menuTimeoutMillis > MENU_DISPLAY_TIMEOUT) {
       menuTimeoutMillis = 0;
       alarmSetState = AlarmSetState::NONE;
+      sleepModeSelectionMenu = false;
       state = CLOCK;
       alarmExecuted = false;
       saveConfig();
@@ -548,6 +558,20 @@ void updateMenu(byte state) {
       break;
     case MENU_CONF_AP:
       memcpy(displayData, SEG_CONF, 4);
+      break;
+  }
+}
+
+void updateSleepModeMenu() {
+  switch (config.sleepLEDs) {
+    case SleepLEDs::FADE:
+      memcpy(displayData, SEG_MENU_SLEEP_EFFECT_FADE, 4);
+      break;
+    case SleepLEDs::FIRE:
+      memcpy(displayData, SEG_MENU_SLEEP_EFFECT_FIRE, 4);
+      break;
+    case SleepLEDs::CANDLES:
+      memcpy(displayData, SEG_MENU_SLEEP_EFFECT_CANDLES, 4);
       break;
   }
 }
