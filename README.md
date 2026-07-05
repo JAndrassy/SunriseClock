@@ -35,3 +35,12 @@ A light 'alarm' clock designed for gentle wake-up with increasing light intensit
 * the candles effect uses slow random pulsing of left and right LEDs block at small PWM range
 * and yes, I will buy a cable with 90° micro USB connector
 
+## 3d print model
+
+My original case was an off-the-shelf box. Now I 3d printed an upgraded version. And I added an USB connector for the back side (power only). 
+
+* [back part on TnkerCAD](https://www.tinkercad.com/things/0kZU8gUUcHl-sunrise-clock-back?sharecode=KiMUcv7OwLVmgu9yl4DQObMB2WHZUO0LVDoLoqKpja0)
+* [front part on TnkerCAD](https://www.tinkercad.com/things/csi3a3ySyaI-sunrise-clock-front?sharecode=RF5Fiv_7e3EJQg3nQURynFMNUEpi_ykk6LtzLKCxbOg)
+
+<img src="img/sunriseclock-front-3d-printed.jpg" width="350"><img src="img/sunriseclock-back-3d-printed.jpg" width="350"><img src="img/sunriseclock-open-2.jpg" width="350">
+
